@@ -3,7 +3,9 @@ $(document).ready(function(){
 
     setupClickListeners();
     // load existing tasks as soon as page loads
-    
+    getTasks();
+    $("viewTasks").on("click", "complete-button", updateCompleteTask);
+    $("viewTasks").on("click", "delete-button", deleteTask);
     
 })
 
@@ -62,7 +64,7 @@ function saveTask(taskToDo){
         data: taskToDo
     }).then(function(response){
         console.log('getting tasks back');
-        // need to create getTasks for getTasks();
+        getTasks();
     })
 }
 
