@@ -66,3 +66,19 @@ function saveTask(taskToDo){
     })
 }
 
+function deleteTask(){
+    let taskId = $(this).data('id');
+    if(confirm("Are you sure you want to delete this task?")){
+        $.ajax({
+            method: 'DELETE',
+            url: `/tasks/${taskId}`
+        })
+        .then((response) => {
+            console.log('Tasks deleted');
+            getTasks();
+        })
+        .catch((error) => {
+            alert('Could not delete tasks', error);
+        });
+    }
+}
