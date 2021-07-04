@@ -26,6 +26,34 @@ function setupClickListeners(){
     });
 }
 
+function getTasks(){
+    console.log('getting tasks');
+    $('#viewTasks').empty();
+    $.ajax({
+        type: 'GET',
+        url: '/tasks',
+    }).then(response => {
+        console.log('Got data from server', response);
+        for(let i of response){
+            let completeButton = "";
+            if (i.ready_to_complete === false){
+                completeButton = `<button class="completed-button" data-id=${i.id}>Mark as Completed,/button>`;
+
+            } else {
+                completeButton = `<button class="completed-button" data-id=${i.id}>Mark as *NOT* Completed</button>`; 
+            }
+            $('#viewTasks').append(`
+                <tr>
+                    <td>${i.task}</td>
+                    <td>${i.notes}</td>
+                    <td>${completeButton}</td>
+                    <td><button class="delete-button" data-id=${i.id}>Delete</button></td>
+                </tr>
+            `);
+        }
+    });
+}
+
 function saveTask(taskToDo){
     console.log('saving task', taskToDo);
     $.ajax({
@@ -37,3 +65,4 @@ function saveTask(taskToDo){
         // need to create getTasks for getTasks();
     })
 }
+
