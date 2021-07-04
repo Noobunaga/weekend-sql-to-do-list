@@ -25,3 +25,15 @@ function setupClickListeners(){
         $('#notesIn').val('';)
     });
 }
+
+function saveTask(taskToDo){
+    console.log('saving task', taskToDo);
+    $.ajax({
+        type: 'POST',
+        url: '/tasks',
+        data: taskToDo
+    }).then(function(response){
+        console.log('getting tasks back');
+        // need to create getTasks for getTasks();
+    })
+}
