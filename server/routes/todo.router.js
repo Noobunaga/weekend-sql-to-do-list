@@ -21,7 +21,7 @@ pool.on('error', (err, client) => {
     console.log('Unexpected error, client nowhere to be found', err);
 });
 
-toDoRouter.get('/', (req, res) =>{
+toDoRouter.get('/', (req, res) => {
     let qText = 'Select * FROM "todolist" ORDER BY completed ASC;';
 
     pool.query(qtext)
@@ -34,3 +34,14 @@ toDoRouter.get('/', (req, res) =>{
         });
 });
 
+toDoRouter.post('/', (req, res) => {
+    const newToDoList = req.body;
+    const qText = `INSERT INTO "toDoList" ("task", "notes", "completed")
+    VALUES ($1, $2, $3)`;
+    pool.query(qText, [newToDoList.task, newToDoList.notes, newToDoList.completed])
+        .then(res.sendStatus(200))
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(500)
+        })
+});
