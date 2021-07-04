@@ -24,7 +24,7 @@ pool.on('error', (err, client) => {
 toDoRouter.get('/', (req, res) => {
     let qText = 'Select * FROM "todolist" ORDER BY completed ASC;';
 
-    pool.query(qtext)
+    pool.query(qText)
         .then(result => {
             res.send(result.rows);
         })
@@ -45,3 +45,22 @@ toDoRouter.post('/', (req, res) => {
             res.sendStatus(500)
         })
 });
+
+toDoRouter.put('/:id', (req, res) => {
+    const toDoId = req.params.id;
+
+    let queryText = `
+    UPDATE "todolist"
+    SET "completed" = NOT "completed"
+    WHERE id = $1;`;
+
+    pool.query(queryText, [toDoId])
+        .then(dbResponse => {
+            console.log('Updated row count: ',dbResponse.rowCount);
+            res.sendStatus(202);
+        })
+        .catch(error => {
+            console.log('There was an error updating the record.', error);
+            res.sendStatus(500);
+        });
+})
