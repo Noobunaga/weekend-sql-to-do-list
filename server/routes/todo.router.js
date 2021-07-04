@@ -64,3 +64,24 @@ toDoRouter.put('/:id', (req, res) => {
             res.sendStatus(500);
         });
 })
+
+toDoRouter.delete('/:id', (req, res) => {
+    console.log('Request URL: ', req.url);
+    console.log('Request route parameters: ', req.params);
+    const toDoId = req.params.id;
+    console.log(`to do id is ${toDoId}`);
+
+    const qText = `DELETE FROM "todolist" WHERE id =$1`;
+
+    pool.query(qText, [toDoId])
+        .then(dbResponse => {
+            console.log(`${dbResponse.rowCount === 1} was deleted from database`);
+            res.sendStatus(201)
+        })
+        .catch(error => {
+            console.log(`Could not delete task with id ${toDoId}.`, error);
+            res.sendStatus(500);
+        });
+});
+
+module.exports = toDoRouter;
