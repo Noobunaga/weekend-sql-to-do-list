@@ -4,8 +4,8 @@ $(document).ready(function(){
     setupClickListeners();
     // load existing tasks as soon as page loads
     getTasks();
-    $("#viewTasks").on("click", "complete-button", updateCompleteTask);
-    $("#viewTasks").on("click", "delete-button", deleteTask);
+    $("#viewTasks").on("click", ".completed-button", updateCompleteTask);
+    $("#viewTasks").on("click", ".delete-button", deleteTask);
     
 })
 
