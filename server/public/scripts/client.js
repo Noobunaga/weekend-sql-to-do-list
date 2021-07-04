@@ -82,3 +82,18 @@ function deleteTask(){
         });
     }
 }
+
+function updateCompleteTask(){
+    let taskId = $(this).data('id');
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${taskId}`
+    })
+    .then((response) => {
+        console.log('ready to complete');
+        getTasks();
+    })
+    .catch((error) => {
+        console.log('Could not update task', error);
+    });
+}
