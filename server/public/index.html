@@ -8,32 +8,41 @@
     <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="views/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
 </head>
 <body>
     <header>
+        <nav class="navbar navbar-dark bg dark">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">TO DO List</span>
+            </div>
+        </nav>
         <img src="" class="">
         <h1>TO DO LIST</h1>
     </header>
-    <section id="addTasks">
-        <h2>ADD TASKS</h2>
-        <input type="text" id="taskIn" value="" placeholder="Task">
-        <input type="text" id="notesIn" value="" placeholder="Notes">
-        <button type="button" id="addButton">Add Task</button>
-    </section>
-    <section>
-        <h2>LIST</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Task</th>
-                    <th>Notes</th>
-                    <th>Completed</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody id="viewTasks">
-            </tbody>
-        </table>
-    </section>
+    <main>
+        <section id="addTasks">
+            <h2>ADD TASKS</h2>
+            <input type="text" id="taskIn" value="" placeholder="Task">
+            <input type="text" id="notesIn" value="" placeholder="Notes">
+            <input type="text" id="completeIn" value="" placeholder="Completed?">
+            <button type="button" id="addButton">Add Task</button>
+        </section>
+        <section>
+            <h2>LIST</h2>
+            <table class= "table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Notes</th>
+                        <th>Completed</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="viewTasks">
+                </tbody>
+            </table>
+        </section>
+    </main>
 </body>
 </html>

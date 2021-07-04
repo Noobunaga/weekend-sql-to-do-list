@@ -14,14 +14,14 @@ You are going to create a 'TO DO' application. This type of application is very 
 **Here are the specific components for the challenge:**
 
 * [x] Create a front end experience that allows a user to create a Task.
-* [] When the Task is created, it should be stored inside of a database (SQL)
-* [] Whenever a Task is created the front end should refresh to show all tasks that need to be completed.
+* [x] When the Task is created, it should be stored inside of a database (SQL)
+* [x] Whenever a Task is created the front end should refresh to show all tasks that need to be completed.
 * SPECIAL [] Move the done task down and incomplete up.
-* [] Each Task should have an option to 'Complete' or 'Delete'.
+* [x] Each Task should have an option to 'Complete' or 'Delete'.
 * [] When a Task is complete, its visual representation should change on the front end. For example, the background of the task container could change from gray to green. 
 * [] The complete option should be  'checked off'. Each of these are accomplished in CSS, but will need to hook into logic to know whether or not the task is complete.
-* [] Whether or not a Task is complete should also be stored in the database.
-* [] Deleting a Task should remove it both from the front end as well as the Database.
+* [x] Whether or not a Task is complete should also be stored in the database.
+* [x] Deleting a Task should remove it both from the front end as well as the Database.
 
 ### Styling
 [] style page
@@ -46,7 +46,7 @@ Please include a `database.sql` text file in your repo that includes all of your
 
 ## Stretch Goals
 
-For each of your strech goals, you will be practicing git branching. Please refer to the branching notes for a reminder on commands. Each branch will be merged into master using `--no-ff`. This will allow us to see that you branched your feature when you turn in your code.
+For each of your stretch goals, you will be practicing git branching. Please refer to the branching notes for a reminder on commands. Each branch will be merged into master using `--no-ff`. This will allow us to see that you branched your feature when you turn in your code.
 
 - `feature-styling-bootstrap` 
 

@@ -9,6 +9,7 @@ const config = {
     host: 'localhost',
     port: 5432,
     max: 10,
+    idleTimeoutMillis: 30000,
 };
 
 const pool = new Pool(config);
@@ -21,8 +22,8 @@ pool.on('error', (err, client) => {
     console.log('Unexpected error, client nowhere to be found', err);
 });
 
-toDoRouter.get('/', (req, res) => {
-    let qText = 'Select * FROM "todolist" ORDER BY completed ASC;';
+taskRouter.get('/', (req, res) => {
+    let qText = 'SELECT * FROM "todolist" ORDER BY id ASC;';
 
     pool.query(qText)
         .then(result => {
@@ -34,11 +35,11 @@ toDoRouter.get('/', (req, res) => {
         });
 });
 
-toDoRouter.post('/', (req, res) => {
-    const newToDoList = req.body;
-    const qText = `INSERT INTO "toDoList" ("task", "notes", "completed")
+taskRouter.post('/', (req, res) => {
+    const newTaskList = req.body;
+    const qText = `INSERT INTO "todolist" ("task", "notes", "completed")
     VALUES ($1, $2, $3)`;
-    pool.query(qText, [newToDoList.task, newToDoList.notes, newToDoList.completed])
+    pool.query(qText, [newTaskList.task, newTaskList.notes, newTaskList.completed])
         .then(res.sendStatus(200))
         .catch((error) => {
             console.log(error);
@@ -46,15 +47,15 @@ toDoRouter.post('/', (req, res) => {
         })
 });
 
-toDoRouter.put('/:id', (req, res) => {
-    const toDoId = req.params.id;
+taskRouter.put('/:id', (req, res) => {
+    const taskId = req.params.id;
 
-    let queryText = `
+    let qText = `
     UPDATE "todolist"
     SET "completed" = NOT "completed"
     WHERE id = $1;`;
 
-    pool.query(queryText, [toDoId])
+    pool.query(qText, [taskId])
         .then(dbResponse => {
             console.log('Updated row count: ',dbResponse.rowCount);
             res.sendStatus(202);
@@ -65,15 +66,15 @@ toDoRouter.put('/:id', (req, res) => {
         });
 })
 
-toDoRouter.delete('/:id', (req, res) => {
+taskRouter.delete('/:id', (req, res) => {
     console.log('Request URL: ', req.url);
     console.log('Request route parameters: ', req.params);
-    const toDoId = req.params.id;
-    console.log(`to do id is ${toDoId}`);
+    const taskId = req.params.id;
+    console.log(`to do id is ${taskId}`);
 
-    const qText = `DELETE FROM "todolist" WHERE id =$1`;
+    const qText = `DELETE FROM "todolist" WHERE id =$1;`;
 
-    pool.query(qText, [toDoId])
+    pool.query(qText, [taskId])
         .then(dbResponse => {
             console.log(`${dbResponse.rowCount === 1} was deleted from database`);
             res.sendStatus(201)
@@ -84,4 +85,4 @@ toDoRouter.delete('/:id', (req, res) => {
         });
 });
 
-module.exports = toDoRouter;
+module.exports = taskRouter;
